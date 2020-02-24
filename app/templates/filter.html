@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>Community Events Board Filtered</title>
+    </head>
+    <body>
+      <h1>Community Events Board Filtered</h1>
+      <div class="event-list">
+        <ul>
+          {% for item in events %}
+            <li>{{item.event_name}} - {{item.event_date}} - {{item.event_category}} - {{item.event_time}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <button><a href="/index">Back</a></button>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Calendar</title>
+    </head>
+    <style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+}
+</style>
+    <body>
+      <h1>Here are your events:</h1>
+
+
+      <div class="event-list">
+        <table style="width:70%" >
+          <tr>
+            <th>Event Name:   </th>
+            <th>Event Starts At:   </th>
+            <th>Event Ends At:   </th>
+          </tr>
+          {% for item in events %}
+          <tr>
+            <td>{{item.event_name}}</td>
+            <td>{{item.event_starttime}} on {{item.event_startdate}} </td>
+            <td>{{item.event_endtime}} on {{item.event_enddate}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+
+    <br>
+    <br>
+      <button><a href="/add">Add an Event!</a></button>
+      <button><a href="/myday">See your schedule breakdown!</a></button>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Add Event</title>
+    </head>
+    <body>
+      <h1>Fill out the form to add an event!</h1>
+
+      <form method = "post" action = "/add">
+      <!-- need event_name and event_date using two text input (bonus- use date) -->
+        <p>Event Name:</p>
+        <input type = "text" name = "event_name"/>
+        <br>
+
+        <p>Event Start Date:</p>
+        <input type = "date" name = "event_startdate"/>
+        <br>
+
+        <p>Event Start Time:</p>
+        <input type = "time" name = "event_starttime"/>
+        <br>
+
+        <p>Event End Date:</p>
+        <input type = "date" name = "event_enddate"/>
+        <br>
+
+        <p>Event End Time:</p>
+        <input type = "time" name = "event_endtime"/>
+        <br>
+        <p>Event Category:</p>
+        <input type = "radio" name = "category" value = "Family">Family
+        <br>
+        <input type = "radio" name = "category" value = "Social">Social
+        <br>
+        <input type = "radio" name = "category" value = "Travel">Travel
+        <br>
+        <input type = "radio" name = "category" value = "Work">Work
+        <br>
+        <br>
+
+          <br>
+        <input type = "submit" value = "submit"/>
+      </form>
+  <button><a href="/index">See your calendar!</a></button>
+    </body>
+</html>
