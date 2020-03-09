@@ -1,13 +1,14 @@
 import os
 from app import app
 from flask import render_template, request, redirect
+from app.models import model
 
 
 
 from flask_pymongo import PyMongo
 
 # name of database
-app.config['MONGO_DBNAME'] = "compsci"
+app.config['MONGO_DBNAME'] = "test"
 
 # URI of database
 app.config['MONGO_URI'] = "mongodb+srv://admin:Funnyturtle40@cluster0-iwlen.mongodb.net/test?retryWrites=true&w=majority"
@@ -56,6 +57,24 @@ def results():
 
     return redirect('/index')
 
-@app.route('/myday')
+
+@app.route('/myday', methods = ['get', 'post'])
 def myday():
-    return render_template('myday.html')
+    percentages = model.peritem()
+    return render_template('myday.html', percentages = percentages)
+
+
+@app.route('/delete')
+def delete():
+    collection = mongo.db.compsci
+    collection.delete_many({})
+    return redirect('/index')
+
+
+@app.route('/test', methods = ["get", "post"])
+def test():
+    collection = mongo.db.compsci
+    thing = model.peritem()
+    print (thing)
+
+    return "go check the terminal"
