@@ -74,7 +74,7 @@ def delete():
 @app.route('/test', methods = ["get", "post"])
 def test():
     collection = mongo.db.compsci
-    thing = model.peritem()
+    thing = model.reccomend()
     print (thing)
 
     return "go check the terminal"

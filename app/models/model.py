@@ -38,6 +38,7 @@ def duration(event_startdate, event_enddate, event_starttime, event_endtime):
 
 def catime ():
     collection = mongo.db.compsci
+    allathitems = list(collection.find({"event_category": "Athletics"}))
     allfamitems = list(collection.find({"event_category": "Family"}))
     allworkitems = list(collection.find({"event_category": "Work"}))
     alltravelitems = list(collection.find({"event_category": "Travel"}))
@@ -48,7 +49,9 @@ def catime ():
     # print (alltravelitems)
     # print (allsocialitems)
     # print (allrelationshipitems)
-    catdictionary = {"familydd": timedelta(0,0,0,0,0), "workdd": timedelta(0,0,0,0,0), "traveldd": timedelta(0,0,0,0,0), "socialdd": timedelta(0,0,0,0,0), "relationshipdd": timedelta(0,0,0,0,0)}
+    catdictionary = {"athleticsdd": timedelta(0,0,0,0,0), "familydd": timedelta(0,0,0,0,0), "workdd": timedelta(0,0,0,0,0), "traveldd": timedelta(0,0,0,0,0), "socialdd": timedelta(0,0,0,0,0), "relationshipdd": timedelta(0,0,0,0,0)}
+    for item in allathitems:
+        catdictionary["athleticsdd"] += duration(item["event_startdate"], item['event_enddate'], item['event_starttime'], item['event_endtime'])
     for item in allfamitems:
         catdictionary["familydd"] += duration(item["event_startdate"], item['event_enddate'], item['event_starttime'], item['event_endtime'])
     for item in allworkitems:
@@ -83,6 +86,7 @@ def peritem():
     catdictionary = catime()
     days = 0
     minutes = 0
+    athsec = (catdictionary["athleticsdd"].days * 24*60*60) + catdictionary["athleticsdd"].seconds
     famsec = (catdictionary["familydd"].days * 24*60*60) + catdictionary["familydd"].seconds
     worksec = (catdictionary["workdd"].days * 24*60*60) + catdictionary["workdd"].seconds
     travelsec = (catdictionary["traveldd"].days * 24*60*60) + catdictionary["traveldd"].seconds
@@ -100,12 +104,26 @@ def peritem():
     print(totalseconds())
     print("That was total seconds")
 
+    athleticspercentage = round(athsec / x *100, 2)
     familypercentage = round(famsec / x *100, 2)
     workpercentage = round(worksec / x *100,2)
     travelpercentage = round(travelsec / x *100,2)
     socialpercentage = round(socialsec / x *100,2)
     relationshippercentage = round(relationshipsec / x *100,2)
 
-    percentages = {"familyper" : familypercentage, "travelper" : travelpercentage, "workper" : workpercentage, "socialper" : socialpercentage, "relationshipper" : relationshippercentage}
+    percentages = {"athper": athleticspercentage, "familyper" : familypercentage, "travelper" : travelpercentage, "workper" : workpercentage, "socialper" : socialpercentage, "relationshipper" : relationshippercentage}
     print (percentages)
     return percentages
+
+def reccomend():
+    x = totalseconds()
+    percentages = peritem()
+
+    reccomend = {"athrec": 20, "famrec": 20, "workrec": 20, "travelrec": 5, "socrec": 15, "relrec": 20}
+    recdifference = {"athdif": percentages["athper"] - reccomend['athrec'], "famdif": percentages["familyper"] - reccomend['famrec'], "workdif": percentages["workper"] - reccomend['workrec'], "traveldif": percentages["travelper"] - reccomend['travelrec'], "socdif": percentages["socialper"] - reccomend['socrec'], "reldif": percentages["relationshipper"] - reccomend['relrec']}
+    saythis = {"ath": "You're currently meeting your target of "+ reccomend['athrec'] + "% of excersise!", "fam": "You're currently meeting your target of "+ reccomend['famrec'] + "% of family time!", "work": "You're currently meeting your target of under "+ reccomend['workrec'] + "of work time!", "travel": "You're currently meeting your target of under "+ reccomend['travel'] + "% of travel time!", "soc": "You're currently meeting your target of "+ reccomend['socrec'] + "% of socializing!", "rel": "You're currently meeting your target of "+ reccomend['relrec'] + " minutes with your partner a day!"}
+    for item in recdifference:
+        if item < 0:
+            recmin = 0 - item
+            
+            item = "You should aim for " 0 - item " more minutes of this in your schedule per day."
