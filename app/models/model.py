@@ -125,5 +125,5 @@ def reccomend():
     for item in recdifference:
         if item < 0:
             recmin = 0 - item
-            
-            item = "You should aim for " 0 - item " more minutes of this in your schedule per day."
+            recmin = recmin * x / 60
+            item = "You should aim for " +recmin + " more minutes of this in your schedule."
