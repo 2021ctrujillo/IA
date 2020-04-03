@@ -10,28 +10,79 @@ table, th, td {
 th, td {
   padding: 15px;
 }
+body {
+background-color: #FCF6FF;
+}
+h1 {
+  color: #CE2EBF;
+  margin-left: 20px;
+}
+p {
+  color: #803175;
+}
 </style>
     <body>
       <h1>Schedule Breakdown:</h1>
 
       <p>
-              % spent doing athletics - {{percentages.athper}}%
+              % spent doing athletics - <strong>{{percentages.athper}}%</strong>
               <br>
-      % spent with family - {{percentages.familyper}}%
+      % spent with family - <strong>{{percentages.familyper}}%</strong>
       <br>
-      % spent with relationship - {{percentages.relationshipper}}%
+      % spent with relationship - <strong>{{percentages.relationshipper}}%</strong>
 
       <br>
-      % spent socializing - {{percentages.socialper}}%
+      % spent socializing - <strong>{{percentages.socialper}}%</strong>
       <br>
-      % spent travelling - {{percentages.travelper}}%
+      % spent commuting - <strong>{{percentages.travelper}}%</strong>
       <br>
-      % spent working - {{percentages.workper}}%
+      % spent working - <strong>{{percentages.workper}}%</strong>
 </p>
+    <br>
+        <br>
+<h1>How Balanced Your Day Is!</h1>
+  <p>
+    <br>  <strong>According to experts, you should have:  </strong>
+    <br>    <br>
+     <strong>{{reccomend.athrec}}% </strong>of exercise
+     <br>
+     <strong>{{reccomend.famrec}}% </strong>of family time
+     <br>
+    <strong> {{reccomend.workrec}}%</strong> (or less) of work time
+     <br>
+    <strong> {{reccomend.travelrec}}% </strong>(or less) of commute time
+     <br>
+     <strong>{{reccomend.socrec}}%</strong> of social time
+     <br>
+     <strong>{{reccomend.relrec}}% </strong>of relationship time
+     <br>
+     in your schedule.
+
+    <br><br><br>
+        <br>
+        <strong>Here's how your schedule compares!    </strong>
+    <br>
+        <br>
+
+    <strong>Athletics:</strong> {{saythis.athdif}}
+    <br>
+    <strong>Family: </strong>{{saythis.famdif}}
+    <br>
+  <strong>  Work: </strong>{{saythis.workdif}}
+    <br>
+  <strong>  Commute:</strong> {{saythis.traveldif}}
+    <br>
+    <strong>Social:</strong> {{saythis.socdif}}
+    <br>
+    <strong>Relationship:</strong> {{saythis.reldif}}
+    <br>
 
 
     <br>
     <br>
+
+
+
       <button><a href="/add">Add an Event!</a></button>
       <button><a href="/index">See your calendar!</a></button>
     </body>

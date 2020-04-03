@@ -117,13 +117,25 @@ def peritem():
 
 def reccomend():
     x = totalseconds()
+    xhours = x /60 /60
     percentages = peritem()
 
     reccomend = {"athrec": 20, "famrec": 20, "workrec": 20, "travelrec": 5, "socrec": 15, "relrec": 20}
-    recdifference = {"athdif": percentages["athper"] - reccomend['athrec'], "famdif": percentages["familyper"] - reccomend['famrec'], "workdif": percentages["workper"] - reccomend['workrec'], "traveldif": percentages["travelper"] - reccomend['travelrec'], "socdif": percentages["socialper"] - reccomend['socrec'], "reldif": percentages["relationshipper"] - reccomend['relrec']}
-    saythis = {"ath": "You're currently meeting your target of "+ reccomend['athrec'] + "% of excersise!", "fam": "You're currently meeting your target of "+ reccomend['famrec'] + "% of family time!", "work": "You're currently meeting your target of under "+ reccomend['workrec'] + "of work time!", "travel": "You're currently meeting your target of under "+ reccomend['travel'] + "% of travel time!", "soc": "You're currently meeting your target of "+ reccomend['socrec'] + "% of socializing!", "rel": "You're currently meeting your target of "+ reccomend['relrec'] + " minutes with your partner a day!"}
+    recdifference1 = {"athdif": percentages["athper"] - reccomend['athrec'], "famdif": percentages["familyper"] - reccomend['famrec'], "workdif": percentages["workper"] - reccomend['workrec'], "traveldif": percentages["travelper"] - reccomend['travelrec'], "socdif": percentages["socialper"] - reccomend['socrec'], "reldif": percentages["relationshipper"] - reccomend['relrec']}
+    recdifference = {"athdif": recdifference1["athdif"], "famdif": recdifference1["famdif"], "workdif": recdifference1["workdif"], "traveldif": recdifference1["traveldif"], "socdif": recdifference1["socdif"], "reldif": recdifference1["reldif"]}
+    recneeded = {"athdif": 0 - recdifference["athdif"], "famdif":  0 - recdifference["famdif"], "workdif":  0 - recdifference["workdif"], "traveldif":  0 - recdifference["traveldif"], "socdif":  0 - recdifference["socdif"], "reldif":  0 - recdifference["reldif"]}
+    saythis = {"athdif": "You're currently meeting your target of "+ str(reccomend['athrec']) + "% of excersise!", "famdif": "You're currently meeting your target of "+ str(reccomend['famrec']) + "% of family time!", "workdif": "You're currently meeting your target of under "+ str(reccomend['workrec']) + "% of work time!", "traveldif": "You're currently meeting your target of under "+ str(reccomend['travelrec']) + "% of travel time!", "socdif": "You're currently meeting your target of "+ str(reccomend['socrec']) + "% of socializing!", "reldif": "You're currently meeting your target of "+ str(reccomend['relrec']) + "% of time with your partner!"}
     for item in recdifference:
-        if item < 0:
-            recmin = 0 - item
-            recmin = recmin * x / 60
-            item = "You should aim for " +recmin + " more minutes of this in your schedule."
+        if float(recdifference[item]) < 0:
+            recmin = 0 - float(recdifference[item])
+            recmin = round(recmin * xhours /100,2)
+            saythis[item] = "You should aim for " + str(recmin) + " more hours of this in your schedule (out of your total " + str(xhours) + " scheduled hours)."
+    print (recdifference1)
+    print(recdifference)
+    print(recneeded)
+    print(saythis)
+    return saythis
+
+def rec():
+    reccomend = {"athrec": 20, "famrec": 20, "workrec": 20, "travelrec": 5, "socrec": 15, "relrec": 20}
+    return reccomend

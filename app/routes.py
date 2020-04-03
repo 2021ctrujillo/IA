@@ -61,7 +61,9 @@ def results():
 @app.route('/myday', methods = ['get', 'post'])
 def myday():
     percentages = model.peritem()
-    return render_template('myday.html', percentages = percentages)
+    reccomend = model.rec()
+    saythis = model.reccomend()
+    return render_template('myday.html', percentages = percentages, reccomend = reccomend, saythis = saythis)
 
 
 @app.route('/delete')

@@ -3,6 +3,17 @@
         <title>Calendar</title>
     </head>
     <style>
+    body {
+  background-color: #EEF9FF;
+}
+
+h1 {
+  color: #1151BA;
+  margin-left: 20px;
+}
+p {
+  color: #00659C;;
+}
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
@@ -15,7 +26,7 @@ th, td {
       <h1>Here are your events:</h1>
 
 
-    
+
       <div class="event-list">
         <table style="width:70%" >
           <tr>
@@ -31,7 +42,8 @@ th, td {
           </tr>
           {% endfor %}
         </table>
-
+            <br>
+<p> *You can clear your calendar by adding /delete to the end of the url.* </p>
     <br>
     <br>
       <button><a href="/add">Add an Event!</a></button>
